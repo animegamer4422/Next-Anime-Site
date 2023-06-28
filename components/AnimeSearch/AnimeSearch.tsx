@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-
+import style from "./AnimeSearch.module.css"
 interface Anime {
   id: string;
   image: string;
@@ -15,7 +15,7 @@ const AnimeSearch: React.FC = () => {
     e.preventDefault();
     setQuery(e.target.value);
 
-    if(e.target.value !== '') {
+    if (e.target.value !== '') {
       try {
         let response = await fetch(`https://animetrix-api.vercel.app/anime/gogoanime/${e.target.value}`);
         if (!response.ok) throw new Error('Error with first API');
@@ -39,8 +39,8 @@ const AnimeSearch: React.FC = () => {
   }
 
   return (
-    <div className="container">
-      <div id="search-form">
+    <div className={style.container}>
+      <div className={style.searchForm}>
         <input
           type='text'
           placeholder='Search anime...'
@@ -49,15 +49,15 @@ const AnimeSearch: React.FC = () => {
           className="input[type='search']"
         />
       </div>
-      <div className="grid">
-      {animeList && animeList.map(anime => (
-  <Link key={anime.id} href={`/anime/${anime.id}`} className="search-result-image">
-    <div className="image-container">
-      <img src={anime.image} alt={anime.title} className="search-image" />
-    </div>
-    <h2 className="search-result-name">{anime.title}</h2>
-  </Link>
-))}
+      <div className={style.grid}>
+        {animeList && animeList.map(anime => (
+          <Link key={anime.id} href={`/anime/${anime.id}`} className={style.searchResultImage}>
+            <div className={style.imageContainer}>
+              <img src={anime.image} alt={anime.title} className={style.searchImage} />
+            </div>
+            <h2 className={style.searchResultName}>{anime.title}</h2>
+          </Link>
+        ))}
 
       </div>
     </div>

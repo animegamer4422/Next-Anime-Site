@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
+import style from "./RecentAnime.module.css"
 interface Episode {
   id: string;
   image: string;
@@ -46,10 +46,10 @@ export default function RecentEpisodes() {
       <div className="grid">
         {recentEpisodes.map(episode => (
           <Link key={episode.id} href={`/anime/${episode.id}`} className="recent-anime-image">
-            <div className="image-container">
-              <img src={episode.image} alt={episode.title} className="recent-anime-img" />
+            <div className={style.imageContainer}>
+              <img src={episode.image} alt={episode.title} className={style.recentAnimeImg} />
             </div>
-            <h2 className="recent-anime-name">{episode.title}</h2>
+            <h2 className={style.recentAnimeName}>{episode.title}</h2>
           </Link>
         ))}
       </div>

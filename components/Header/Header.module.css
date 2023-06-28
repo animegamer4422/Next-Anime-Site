@@ -1,0 +1,28 @@
+.headerWrapper {
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+  }
+  
+  .logo span {
+    text-decoration: none;
+    
+  }
+  
+  .logo {
+    margin: 0px auto;
+    padding: 9px;
+    border-radius: 20px;
+    background-color: #162032;
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    transition: box-shadow 0.3s ease;
+    width: fit-content;
+  }
+  
+  .logo:hover {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
+  }
+  
+  .logo a {
+    text-decoration: none;
+    
+  }
+  

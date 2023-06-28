@@ -5,8 +5,8 @@ import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
 import '../../../src/app/globals.css';
 import Head from 'next/head';
-import Header from '../../../components/Header';
-import AnimeSearch from '../../../components/AnimeSearch';
+import Header from '../../../components/Header/Header';
+import AnimeSearch from '../../../components/AnimeSearch/AnimeSearch';
 
 
 interface Anime {
@@ -66,15 +66,15 @@ export default function VideoPlayer() {
 
       const apiUrl = `https://api.amvstr.ml/api/v2/stream/${episodeId}`;
       fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-            const mainUrl = data.data.stream.multi.main.url;
-            setMainUrl(mainUrl);
-          })
-          .catch(error => console.error('Error:', error));
-      }
+        .then(response => response.json())
+        .then(data => {
+          const mainUrl = data.data.stream.multi.main.url;
+          setMainUrl(mainUrl);
+        })
+        .catch(error => console.error('Error:', error));
+    }
   }, [episodeNumber, episodeId]);
-      
+
   useEffect(() => {
     if (mainUrl && videoRef.current) {
       const video = videoRef.current;
@@ -96,7 +96,7 @@ export default function VideoPlayer() {
           "fullscreen",
         ],
       });
-      
+
       if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(mainUrl);
@@ -109,75 +109,82 @@ export default function VideoPlayer() {
         video.addEventListener("canplaythrough", function () {
           video.pause();
         });
-    } else {
+      } else {
         console.error("This is a legacy browser that does not support HLS.");
+      }
     }
-  }
-}, [mainUrl]);
+  }, [mainUrl]);
 
-return (
-  <div>
-    <Head>
-      <title>Anime Site - Video Player</title>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-      <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
-      <style>{`
+  return (
+    <div>
+      <Head>
+        <title>Anime Site - Video Player</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+        <style>{`
         :root {
           --plyr-color-main: #ff69b4;
           --plyr-video-background: #282a36;
         }
-      `}</style>  
-    </Head>
-    
-    <Header />
+      `}</style>
+      </Head>
 
-    <div className="search-section">
-      <AnimeSearch />
-    </div>
+      <Header />
 
-    <main>
-      <section className="video-section">
-        <div className="container">
-          <h2 className="video-title">Video Player</h2>
-          <div className="player-wrapper">
-            {mainUrl && (
-              <video ref={videoRef} id="player" width="320" height="240" controls playsInline>
-                <source src={mainUrl} type="application/vnd.apple.mpegurl" />
-                Your browser does not support the video tag.
-              </video>
+      <div className="search-section">
+        <AnimeSearch />
+      </div>
+
+      <main>
+        <section className="video-section">
+          <div className="container">
+            <h2 className="video-title">Video Player</h2>
+            <div className="player-wrapper">
+              {mainUrl && (
+                <video ref={videoRef} id="player" width="320" height="240" controls playsInline>
+                  <source src={mainUrl} type="application/vnd.apple.mpegurl" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+
+              <div className="episodelist">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => (
+                  <button key={id}>{id}</button>
+                ))}
+
+              </div>
+            </div>
+            {anime && episodeNumber && (
+              <p className="current-ep">{anime.title} - Episode {episodeNumber}</p>
             )}
           </div>
-          {anime && episodeNumber && (
-            <p className="current-ep">{anime.title} - Episode {episodeNumber}</p>
-          )}
+        </section>
+
+        <div className="episode-navigation">
+          <button
+            id="prev-episode"
+            className="episode-button"
+            onClick={() => navigateToEpisode(-1)}
+            disabled={Number(episodeNumber) <= 1} // Disable button if it's the first episode
+          >
+            Previous
+          </button>
+          <button
+            id="next-episode"
+            className="episode-button"
+            onClick={() => navigateToEpisode(1)}
+          >
+            Next
+          </button>
         </div>
-      </section>
 
-      <div className="episode-navigation">
-        <button 
-          id="prev-episode" 
-          className="episode-button" 
-          onClick={() => navigateToEpisode(-1)}
-          disabled={Number(episodeNumber) <= 1} // Disable button if it's the first episode
-        >
-          Previous
-        </button>
-        <button 
-          id="next-episode" 
-          className="episode-button" 
-          onClick={() => navigateToEpisode(1)}
-        >
-          Next
-        </button>
-      </div>
+      </main>
 
-    </main>
-
-    <footer className="footer">
-      <div className="footer-wrapper">
-        <p>&copy; Anime Site 2023</p>
-      </div>
-    </footer>
-  </div>
-);
+      <footer className="footer">
+        <div className="footer-wrapper">
+          <p>&copy; Anime Site 2023</p>
+        </div>
+      </footer>
+    </div>
+  );
 }
