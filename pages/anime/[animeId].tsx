@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { SetStateAction, useEffect, useState } from 'react';
 import Link from 'next/link';
-import AnimeSearch from '../../components/AnimeSearch';
+import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 
 import '../../src/app/globals.css';
+import Header from '../../components/Header/Header';
 
 interface Anime {
   id: string;
@@ -74,12 +75,7 @@ export default function AnimeDetails() {
 
   return (
     <div className="container">
-      <header className="header-wrapper logo">
-        <Link href='/'>
-          <h1 className="logo">Anime Site</h1>
-        </Link>
-      </header>
-  
+  <Header/>
       <div className="search-section">
         <form id="search-form">
           <AnimeSearch />

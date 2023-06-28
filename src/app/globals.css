@@ -1,3 +1,11 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+}
+
 /* General styles */
 body {
   background-color:  #282a36;
@@ -14,31 +22,6 @@ a {
 }
 
 /* Header styles */
-.header-wrapper {
-  background: linear-gradient(90deg, #ff69b4, #ff1493);
-}
-
-.logo span {
-  text-decoration: none;
-}
-
-.logo {
-  margin: 0 auto;
-  padding: 9px;
-  border-radius: 20px;
-  background-color: #162032;
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  transition: box-shadow 0.3s ease;
-  width: fit-content;
-}
-
-.logo:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-}
-
-.logo a {
-  text-decoration: none;
-}
 
 
 /* Switch styles */
@@ -67,40 +50,7 @@ input:focus + .slider {
 
 
 /* Search section styles */
-.search-section {
-  background-color:  #282a36;
-  margin: 0;
-  padding: 0;
-}
 
-#search-form {
-  margin-bottom: 2rem;
-  max-width: 95%; /* Adjust to your preference */
-  margin: 0 auto; /* Centers the form horizontally */
-  margin-bottom: 2rem;
-}
-
-#search-form input[type='text'] {
-  background-color: #162032;
-  border: none;
-  color: #fff;
-  padding: 15px 25px; /* Increased padding */
-  border-radius: 20px;
-  width: 100%; /* Full width of the parent */
-  outline: none;
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  transition: box-shadow 0.3s ease;
-  font-size: 1.2em; /* Increase the font size if needed */
-}
-
-#search-form input[type='text']::placeholder {
-  color: #fff;
-  opacity: 0.7;
-}
-
-#search-form input:focus ,#search-form input:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-}
 
 /* Button styles */
 button[type="submit"], .episode-button, .pagination button {
@@ -165,7 +115,7 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 
 /* Global styles */
 .container {
-  max-width: 1200px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -176,46 +126,8 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   gap: 2rem;
 }
 
-.search-result-image, .recent-anime-image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #242424; /* Replace with your desired color */
-  border-radius: 10px;
-  overflow: hidden;
-  height: 100%;
-}
 
-.search-result-name, .recent-anime-name {
-  background-color: #242424; /* Replace with your desired color */
-  color: #fff;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 3em; /* Adjust the height as needed */
-}
 
-.search-image, .recent-anime-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.episode-image .image-container {
-  width: 100%;
-  height: 0;
-  padding-top: 75%; /* Adjust this value to change the aspect ratio */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 /* loading spinner animation */
@@ -247,28 +159,16 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   max-height: 100%;
   margin: 0;
   overflow-x: hidden;
+  padding-bottom: 40px;
 }
 
 .episode-btn {
-  display: inline-block;
-  border: 4px solid #ff69b4; /* Border of darker pink color */
-  padding: 1.5em; /* Increase the padding to make the buttons bigger */
-  margin: 0.1em; /* Decrease the margin to reduce the gap between buttons */
-  text-decoration: none;
-  background: #162032; /* Background color same as logo */
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 0.85em;
-  cursor: pointer;
+  border: 2px solid #ff69b4; /* Border of darker pink color */
+  padding: 8px 12px;
+  font-size: 18px;
+  width: 100px;
   text-align: center;
-  transition: all 0.3s ease-in-out;
-  border-radius: 20px; /* Similar border radius as logo */
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  outline: none;
-  width: 60px; /* Set a fixed width */
-  white-space: nowrap; /* Prevents the text inside from breaking into new lines */
-  overflow: hidden; /* Hides any text that overflows the button */
-  text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+  border-radius: 19px;
 }
 
 
@@ -277,11 +177,10 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 }
 
 .episode-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1em;
-  list-style-type: none;
-  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 400px;
+  gap: 15px;
 }
 
 .episode-search-section {
@@ -362,12 +261,20 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   width: 100%;  /* Add this line to set width relative to parent container */
   margin: 0;
   padding: 0;
+  padding-bottom: 50px;
 }
-
+@media(max-width:600px){
+  .anime-container{
+    justify-content: center;
+    align-items: center;
+  }
+}
 #anime-image img {
   height: 50vh; 
   object-fit: cover; 
+  margin-top: 1rem;
   object-position: top; 
+  border-radius: 14px;
 }
 
 
@@ -393,7 +300,21 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 
 
 /* Video Player styles */
-
+.player-wrapper{
+  max-width: 800px;
+  margin-top: 10px;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+@media(max-width:600px){
+  .player-wrapper{
+    flex-direction: column;
+  }
+}
+.episodelist{
+  background: red;
+}
 .videoPlayer {
   background-color: #162032;
   border-radius: 20px;
@@ -441,16 +362,15 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 /* pagination */
 .episode-navigation {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 20px;
+  padding: 30px;
+  margin-left: 70px;
 }
 
-.episode-navigation .episode-button {
-  display: inline-block;
-  border: 4px solid #ff69b4; /* Border of darker pink color */
-  padding: 1.5em; /* Increase the padding to make the buttons bigger */
+.episodes-section-navigation .episode-button {
+  border: 2px solid #ff69b4; /* Border of darker pink color */
+  padding: 1em; /* Increase the padding to make the buttons bigger */
   margin: 0.1em; /* Decrease the margin to reduce the gap between buttons */
-  text-decoration: none;
   background: #162032; /* Background color same as logo */
   color: #ffffff;
   font-family: sans-serif;
@@ -461,10 +381,7 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   border-radius: 20px; /* Similar border radius as logo */
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
   outline: none;
-  width: 100px; /* Set a fixed width */
-  white-space: nowrap; /* Prevents the text inside from breaking into new lines */
-  overflow: hidden; /* Hides any text that overflows the button */
-  text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+  width: 130px; /* Set a fixed width */
 }
 
 .episode-navigation .episode-button:hover {
@@ -534,20 +451,16 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 }
 
   .episode-btn:hover {
+    
     box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
   }
 
   .episode-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1em;
-    list-style-type: none;
-    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  #search-form {
-    max-width: 80%; /* Adjust to your preference */
-  }
+
 
   .episode-image .image-container {
     width: 100%;

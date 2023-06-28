@@ -1,0 +1,29 @@
+
+   .recentAnimeimage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #242424; /* Replace with your desired color */
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100%;
+  }
+  
+ .recentAnimeName {
+    background-color: #242424; /* Replace with your desired color */
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 3em; /* Adjust the height as needed */
+    font-size: 15px;
+  }
+  
+ .recentAnimeImg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
