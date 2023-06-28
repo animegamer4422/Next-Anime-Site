@@ -1,35 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Anime Site: A NextJS Pet Project 
+
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" width="320" alt="NextJS Logo" />
+</p>
+
+Anime Site is a personal project developed with the aim to learn and explore NextJS. It's a platform where anime enthusiasts can browse, search, and learn more about their favorite anime shows.
+
+## Features
+
+* Browse and search for various anime
+* Get detailed information about each anime
+* User-friendly and responsive design
 
 ## Getting Started
 
-First, run the development server:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Prerequisites
+
+- Node.js
+- NPM
+
+### Installation 
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-github-username/anime-site.git
+   ```
+2. Navigate into the cloned repository
+   ```bash
+   cd anime-site
+   ```
+3. Install the dependencies
+   ```bash
+   npm install
+   ```
+4. Run the application
+   ```bash
+   npm run dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contributing
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Next-Anime-Site
+[GPL](https://choosealicense.com/licenses/gpl-3.0/)
