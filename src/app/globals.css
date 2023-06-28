@@ -98,7 +98,7 @@ input:focus + .slider {
   opacity: 0.7;
 }
 
-#search-form input:focus {
+#search-form input:focus ,#search-form input:hover {
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
 }
 
@@ -112,13 +112,6 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   background-color: #ff1493;
 }
 
-.episode-button:disabled, .pagination button:disabled {
-  background-color: #f8bbd0;
-}
-
-.episode-button:disabled:hover, .pagination button:disabled:hover {
-  background-color: #f8bbd0;
-}
 
 /* Loading spinner styles */
 .loading-spinner {
@@ -256,24 +249,28 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   overflow-x: hidden;
 }
 
-
 .episode-btn {
   display: inline-block;
   border: 4px solid #ff69b4; /* Border of darker pink color */
-  padding: 1.5em 1.5em; /* Increase the padding to make the buttons bigger */
+  padding: 1.5em; /* Increase the padding to make the buttons bigger */
   margin: 0.1em; /* Decrease the margin to reduce the gap between buttons */
   text-decoration: none;
   background: #162032; /* Background color same as logo */
   color: #ffffff;
   font-family: sans-serif;
-  font-size: 0.8.5em;
+  font-size: 0.85em;
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease-in-out;
   border-radius: 20px; /* Similar border radius as logo */
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
   outline: none;
+  width: 60px; /* Set a fixed width */
+  white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+  overflow: hidden; /* Hides any text that overflows the button */
+  text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
 }
+
 
 .episode-btn:hover {
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
@@ -368,11 +365,11 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 }
 
 #anime-image img {
-  width: 100%; 
-  height: 90vh; 
+  height: 50vh; 
   object-fit: cover; 
   object-position: top; 
 }
+
 
 
 .anime-details {
@@ -386,18 +383,17 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 
 .anime-details #anime-title {
   color: #fff;
-  padding: 10px;
-  width: 100%;
+  width: 90%;
   text-align: center;
-  overflow-y: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 3em;
+  height: auto;
+  font-size: calc(16px + 1vw);
+  overflow: hidden;
+  white-space: normal; /* Allow the text to wrap */
 }
 
 
-/* Video player styles */
 /* Video Player styles */
+
 .videoPlayer {
   background-color: #162032;
   border-radius: 20px;
@@ -431,18 +427,138 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   height: 3em;
 }
 
-.videoPlayerHeader .animeName {
+.animeName {
   color: #ff69b4;
   font-size: 1.4em;
   margin: 0;
 }
 
-.videoPlayerHeader .episodeNumber {
+.episodeNumber {
   color: hsl(0, 0%, 80%);
   font-size: 1.2em;
 }
 
-.videoPlayer video {
-  width: 100%;
-  border-radius: 20px;
+/* pagination */
+.episode-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.episode-navigation .episode-button {
+  display: inline-block;
+  border: 4px solid #ff69b4; /* Border of darker pink color */
+  padding: 1.5em; /* Increase the padding to make the buttons bigger */
+  margin: 0.1em; /* Decrease the margin to reduce the gap between buttons */
+  text-decoration: none;
+  background: #162032; /* Background color same as logo */
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 0.85em;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border-radius: 20px; /* Similar border radius as logo */
+  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+  outline: none;
+  width: 100px; /* Set a fixed width */
+  white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+  overflow: hidden; /* Hides any text that overflows the button */
+  text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+}
+
+.episode-navigation .episode-button:hover {
+  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
+}
+
+/* Styles for disabled buttons */
+.episode-button:disabled:hover, .pagination button:disabled:hover {
+  background-color: #f47ca6;
+}
+
+/* Styles for enabled buttons */
+.episode-button:hover, .pagination button:hover {
+  background-color: #f47ca6;
+}
+
+/* CSS Media Query for mobile devices */
+
+@media (max-width: 768px) {
+  .anime-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #anime-details {
+    order: 1;
+  }
+
+  #episode-list {
+    order: 2;
+  }
+
+  .episodes-section {
+    flex: 1;
+    width: 89%;
+    background-color: #162032;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    height: auto;
+    max-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  .episode-btn {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    border: 4px solid #ff69b4; /* Border of darker pink color */
+    padding: 0.8em; /* Increase the padding to make the buttons bigger */
+    text-decoration: none;
+    background: #162032; /* Background color same as logo */
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px; /* Similar border radius as logo */
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    outline: none;
+    white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+    overflow: hidden; /* Hides any text that overflows the button */
+    text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+    flex-grow: 1;
+}
+
+  .episode-btn:hover {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
+  }
+
+  .episode-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  #search-form {
+    max-width: 80%; /* Adjust to your preference */
+  }
+
+  .episode-image .image-container {
+    width: 100%;
+    height: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }

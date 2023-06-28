@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { SetStateAction, useEffect, useState } from 'react';
 import Link from 'next/link';
 import AnimeSearch from '../../components/AnimeSearch';
+
 import '../../src/app/globals.css';
 
 interface Anime {
@@ -24,7 +25,7 @@ export default function AnimeDetails() {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => { // Corrected type of the event
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -35,7 +36,7 @@ export default function AnimeDetails() {
   useEffect(() => {
     const fetchAnimeDetails = async () => {
       setLoading(true);
-      if (typeof animeId === 'undefined') return; // Check if animeId is undefined not falsy
+      if (typeof animeId === 'undefined') return;
 
       const primaryApiUrl = `https://animetrix-api.vercel.app/anime/gogoanime/info/${animeId}`;
       const fallbackUrl = `https://api.consumet.org/anime/gogoanime/info/${animeId}`;
@@ -52,7 +53,6 @@ export default function AnimeDetails() {
       } catch (primaryApiError) {
         console.error('Error:', primaryApiError);
       
-        // Fallback API
         try {
           const fallbackResponse = await fetch(fallbackUrl);
 
@@ -72,14 +72,11 @@ export default function AnimeDetails() {
     fetchAnimeDetails();
   }, [animeId]);
 
-  const navigateToEpisode = (episodeNumber: number, episodeId: string) => {
-    router.push(`/video-player/${episodeNumber}/${episodeId}`);
-  }
   return (
     <div className="container">
       <header className="header-wrapper logo">
         <Link href='/'>
-          <h1 className="logo">Anime Site</h1> {/* Replace with your actual logo */}
+          <h1 className="logo">Anime Site</h1>
         </Link>
       </header>
   
@@ -93,15 +90,15 @@ export default function AnimeDetails() {
         <div className="loader"></div>
       ) : anime ? (
         <div className="anime-container">
-          <div className="anime-details">
+          <div className="anime-details" id="anime-details">
             <h1 id="anime-title">{anime.title}</h1>
             <div id="anime-image">
               <img src={anime.image} alt={anime.title} />
             </div>
-            <p id="anime-description">{anime.description}</p>
+            <p className="anime-desc" id="anime-description">{anime.description}</p>
           </div>
   
-          <div className="episodes-section">
+          <div className="episodes-section" id="episode-list">
             <div className="episode-search-section">
               <form className="episode-search-form">
                 <input 
@@ -116,11 +113,10 @@ export default function AnimeDetails() {
             <ul id="anime-episodes" className="episode-grid">
               {filteredEpisodes.map((episode) => (
                 <li key={episode.id}>
-                  <Link 
-                    href={`/video-player/${episode.number}/${episode.id}`}
-                    className="episode-btn"
-                  >
-                    Episode {episode.number}
+                  <Link href={`/video-player/${episode.number}/${episode.id}`}>
+                      <h2 className="episode-btn">
+                        EP {episode.number}
+                      </h2>
                   </Link>
                 </li>
               ))}
@@ -131,5 +127,5 @@ export default function AnimeDetails() {
         <p>Error loading data...</p>
       )}
     </div>
-  );
-      }  
+  );  
+}  
