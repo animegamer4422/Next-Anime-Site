@@ -8,6 +8,7 @@ import './Episode.module.css'
 import Head from 'next/head';
 import Header from '../../../components/Header/Header';
 import AnimeSearch from '../../../components/AnimeSearch/AnimeSearch';
+import Footer from '../../../components/Footer/Footer'; // import the Footer component
 
 
 interface Anime {
@@ -182,11 +183,7 @@ export default function VideoPlayer() {
 
       </main>
 
-      <footer className="footer">
-        <div className="footer-wrapper">
-          <p>&copy; Anime Site 2023</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
-}
+};
