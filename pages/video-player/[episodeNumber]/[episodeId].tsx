@@ -4,6 +4,7 @@ import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
 import '../../../src/app/globals.css';
+import './Episode.module.css'
 import Head from 'next/head';
 import Header from '../../../components/Header/Header';
 import AnimeSearch from '../../../components/AnimeSearch/AnimeSearch';
@@ -65,10 +66,11 @@ export default function VideoPlayer() {
       fetchAnimeDetails(baseAnimeId);
 
       const apiUrl = `https://api.amvstr.ml/api/v2/stream/${episodeId}`;
+      console.log(apiUrl);
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          const mainUrl = data.data.stream.multi.main.url;
+          const mainUrl = data.stream.multi.main.url;
           setMainUrl(mainUrl);
         })
         .catch(error => console.error('Error:', error));

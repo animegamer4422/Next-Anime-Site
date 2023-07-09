@@ -1,101 +1,137 @@
+.content{
+margin: 20px;
+}
 
-.anime-container {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: stretch;
-    background-color: #242424;
-    height: 100%;  /* Adjust to 100% if you want to set the height relative to parent container */
-    width: 100%;  /* Add this line to set width relative to parent container */
-    margin: 0;
-    padding: 0;
-    padding-bottom: 50px;
-  }
-  @media(max-width:600px){
-    .anime-container{
-      justify-content: center;
-      align-items: center;
-    }
-  }
-  #anime-image img {
-    height: 50vh; 
-    object-fit: cover; 
-    margin-top: 1rem;
-    object-position: top; 
-    border-radius: 14px;
-  }
-  
-  
-  
-  .anime-details {
-    flex: 1;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
+.animeContainer {
+  max-width: 100%; /* Or whatever percentage or pixel value you prefer */
+  margin: 0 auto; /* This centers the container on the page */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  background-color: #242424;
+  height: 100%;
+  padding: 0;
+  border-radius: 20px;
+}
+
+.animeDetails {
+  flex: 1;  /* instead of width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+}
+
+.animeDetails #animeTitle {
+  color: #fff;
+  width: 90%;
+  text-align: center;
+  height: auto;
+  font-size: calc(16px + 1vw);
+  overflow: hidden;
+  white-space: normal;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #ff69b4; /* Pink */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.contentWrapper {
+  max-width: 90%; /* or whatever percentage or pixel value you prefer */
+  margin: 0 auto; /* this centers the wrapper on the page */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+}
+
+
+@media (max-width: 600px) {
+  .animeContainer {
+    justify-content: center;
     align-items: center;
-    height: auto;
   }
-  
-  .anime-details #anime-title {
-    color: #fff;
-    width: 90%;
-    text-align: center;
-    height: auto;
-    font-size: calc(16px + 1vw);
-    overflow: hidden;
-    white-space: normal; /* Allow the text to wrap */
-  }
-  
+}
 
-.episodes-section {
+#animeImage img {
+  height: 50vh;
+  object-fit: cover;
+  margin-top: 1rem;
+  object-position: top;
+  border-radius: 14px;
+}
+
+.episodesSection {
   flex: 1;
-  width: 35%;
   background-color: #162032;
   border-radius: 10px;
-  padding: 20px;
+  padding-top: 20px;
   overflow-y: auto;
   height: auto;
   max-height: 100%;
   margin: 0;
   overflow-x: hidden;
-  padding-bottom: 40px;
 }
 
-.episode-btn {
-  border: 2px solid #ff69b4; /* Border of darker pink color */
-  padding: 8px 12px;
-  font-size: 18px;
-  width: 100px;
+
+.episodeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  border: 4px solid #ff69b4; /* Border of darker pink color */
+  padding: 0.8em; /* Increase the padding to make the buttons bigger */
+  text-decoration: none;
+  background: #162032; /* Background color same as logo */
+  color: #ffffff;
+  font-family: sans-serif;
+  font-size: 1em;
+  margin: 2em;
+  cursor: pointer;
   text-align: center;
-  border-radius: 19px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 20px; /* Similar border radius as logo */
+  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+  outline: none;
+  white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+  overflow: hidden; /* Hides any text that overflows the button */
+  text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+  flex-grow: 1;
 }
-
-
-.episode-btn:hover {
+.episodeBtn:hover {
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
 }
-
-.episode-grid {
+.episodeGrid {
   display: flex;
   flex-wrap: wrap;
-  max-height: 400px;
-  gap: 15px;
 }
 
-.episode-search-section {
-  background-color:  #162032;
+
+.episodeSearchSection {
+  background-color: #162032;
   margin: 0;
   padding: 0;
 }
 
-.episode-search-form {
+.episodeSearchForm {
   margin-bottom: 2rem;
   width: 70%; /* Adjust to your preference */
   margin: 0 auto; /* Centers the form horizontally */
   margin-bottom: 2rem;
 }
 
-.episode-search-input {
+.episodeSearchInput {
   background-color: #162032;
   border: none;
   color: #fff;
@@ -108,76 +144,74 @@
   font-size: 1.2em; /* Increase the font size if needed */
 }
 
-.episode-search-input::placeholder {
+.episodeSearchInput::placeholder {
   color: #fff;
   opacity: 0.7;
 }
 
-.episode-search-input:focus {
+.episodeSearchInput:focus {
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
 }
 
 /* episode section scrollbar */
 
 /* Chrome and Edge */
-.episodes-section::-webkit-scrollbar {
+.episodesSection::-webkit-scrollbar {
   width: 15px; /* Width of the scrollbar */
 }
 
-.episodes-section::-webkit-scrollbar-track {
+.episodesSection::-webkit-scrollbar-track {
   background: #282a36; /* Background color of the track */
   border-radius: 10px; /* Make the track rounded */
 }
 
-.episodes-section::-webkit-scrollbar-thumb {
+.episodesSection::-webkit-scrollbar-thumb {
   background: #242424; /* Color of the scroll thumb */
   border-radius: 10px; /* Make the scroll thumb rounded */
   border: 3px solid #282a36; /* Create a "padding" effect */
 }
 
-.episodes-section::-webkit-scrollbar-thumb:hover {
+.episodesSection::-webkit-scrollbar-thumb:hover {
   background: #ff69b4; /* Color when hovering over the scroll thumb */
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3); /* Subtle pink glow when hovering */
 }
 
 /* Firefox */
-.episodes-section {
+.episodesSection {
   scrollbar-width: thick; /* Width of the scrollbar */
   scrollbar-color: #242424 #282a36; /* Color of the scroll thumb and track */
 }
 
-.episodes-section:hover {
+.episodesSection:hover {
   scrollbar-color: #ff69b4 #282a36; /* Color when hovering over the scroll thumb and track */
 }
 
 @media (max-width: 768px) {
-  .anime-container {
+  .animeContainer {
     display: flex;
     flex-direction: column;
   }
 
-  #anime-details {
+  #animeDetails {
     order: 1;
   }
 
-  #episode-list {
+  #episodeList {
     order: 2;
   }
 
-  .episodes-section {
+  .episodesSection {
     flex: 1;
-    width: 89%;
     background-color: #162032;
     border-radius: 10px;
-    padding: 20px;
+    padding-top: 20px;
     overflow-y: auto;
     height: auto;
     max-height: 100%;
-    margin: 0;
     overflow-x: hidden;
-  }
-  
-  .episode-btn {
+  }  
+
+  .episodeBtn {
     display: flex;
     justify-content: center;
     align-items: left;
@@ -200,19 +234,17 @@
     flex-grow: 1;
 }
 
-  .episode-btn:hover {
+  .episodeBtn:hover {
     
     box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
   }
 
-  .episode-grid {
+  .episodeGrid {
     display: flex;
     flex-wrap: wrap;
   }
 
-
-
-  .episode-image .image-container {
+  .episodeImage .imageContainer {
     width: 100%;
     height: 0;
     background-position: center;

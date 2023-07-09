@@ -42,17 +42,18 @@ export default function RecentEpisodes() {
   return (
     <div className="container">
       <h1 className="text-2xl font-bold mb-4">New Releases</h1>
-      {loading && <div className="loader"></div>}
+      {loading && <div className={style.loader}></div>}
       <div className="grid">
         {recentEpisodes.map(episode => (
-          <Link key={episode.id} href={`/anime/${episode.id}`} className="recent-anime-image">
-            <div className={style.imageContainer}>
-              <img src={episode.image} alt={episode.title} className={style.recentAnimeImg} />
+          <Link key={episode.id} href={`/anime/${episode.id}`}>
+            <div className={style.recentAnimeImage}>
+              <div className={style.recentAnimeImg} style={{backgroundImage: `url(${episode.image})`}} />
+              <h2 className={style.recentAnimeName}>{episode.title}</h2>
             </div>
-            <h2 className={style.recentAnimeName}>{episode.title}</h2>
           </Link>
         ))}
       </div>
     </div>
-  );
+  ); 
+    
 }

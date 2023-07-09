@@ -1,0 +1,151 @@
+/* General styles for the container */
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  /* Loader animation styles */
+  .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #ff69b4; /* Pink */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Anime container styles */
+  .anime-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: #242424;
+    height: 100%;  /* Adjust to 100% if you want to set the height relative to parent container */
+    width: 100%;  /* Add this line to set width relative to parent container */
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media(max-width:600px){
+    .anime-container{
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  /* Anime details styles */
+  .anime-details {
+    flex: 1;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+  
+  .anime-details #anime-title {
+    color: #fff;
+    width: 90%;
+    text-align: center;
+    height: auto;
+    font-size: calc(16px + 1vw);
+    overflow: hidden;
+    white-space: normal; /* Allow the text to wrap */
+  }
+  
+  #anime-image img {
+    height: 50vh; 
+    object-fit: cover; 
+    margin-top: 1rem;
+    object-position: top; 
+    border-radius: 14px;
+  }
+  
+  /* Episode list styles */
+  .episodes-section {
+    flex: 1;
+    width: 35%;
+    background-color: #162032;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    height: auto;
+    max-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+  }
+  
+  .episode-btn {
+    border: 4px solid #ff69b4; /* Border of darker pink color */
+    padding: 0.5em; /* Increase the padding to make the buttons bigger */
+    margin: 1em;
+    width: 80px;
+    height: 50px;
+    background: #162032; /* Background color same as logo */
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px; /* Similar border radius as logo */
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    outline: none;
+    white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+    overflow: hidden; /* Hides any text that overflows the button */
+  }
+  
+  .episode-btn:hover {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
+  }
+  
+  .episode-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  
+  .episode-search-section {
+    background-color:  #162032;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .episode-search-form {
+    margin-bottom: 2rem;
+    width: 70%; /* Adjust to your preference */
+    margin: 0 auto; /* Centers the form horizontally */
+    margin-bottom: 2rem;
+  }
+  
+  .episode-search-input {
+    background-color: #162032;
+    border: none;
+    color: #fff;
+    padding: 10px 20px; /* Slightly decreased padding */
+    border-radius: 20px;
+    width: 100%; /* Full width of the parent */
+    outline: none;
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    transition: box-shadow 0.3s ease;
+    font-size: 1.2em; /* Increase the font size if needed */
+  }
+  
+  .episode-search-input::placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
+  
+  .episode-search-input:focus {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
+  }
+  

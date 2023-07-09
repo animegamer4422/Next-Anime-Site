@@ -1,18 +1,22 @@
 *{
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   list-style-type: none;
   text-decoration: none;
 }
 
-/* General styles */
 body {
   background-color:  #282a36;
   color: #fff;
   font-family: 'Roboto', sans-serif;
 }
 
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Text styles */
 h2 {
   color: #ff69b4;
 }
@@ -20,37 +24,6 @@ h2 {
 a {
   color: hsl(0, 0%, 80%);
 }
-
-/* Header styles */
-
-
-/* Switch styles */
-.switch input:checked + .slider {
-  background-color: #ff69b4;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #f321e2;
-}
-
-/* Anime description styles */
-.anime-description {
-  background-color: #162032;
-}
-
-.anime-image {
-  background-color: #162032;
-}
-
-
-#anime-description {
-  padding: 20px;  /* adjust as per requirement */
-  font-size: 1.2em;  /* Increase the font size */
-}
-
-
-/* Search section styles */
-
 
 /* Button styles */
 button[type="submit"], .episode-button, .pagination button {
@@ -62,75 +35,23 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
   background-color: #ff1493;
 }
 
-
-/* Loading spinner styles */
-.loading-spinner {
-  background-color: rgba(0, 0, 0, 0.5);
+/* Switch styles */
+.switch input:checked + .slider {
+  background-color: #ff69b4;
 }
 
-.spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #ff69b4;
+input:focus + .slider {
+  box-shadow: 0 0 1px #f321e2;
 }
 
-/* Episode styles */
-.episode {
-  background-color: #f06292;
-  color: #fff;
-}
-
-.episode:hover {
-  background-color: #e91e63;
-}
-
-/* Footer styles */
-.footer-wrapper {
-  background: #162032;
-  border-radius: 20px;
-  padding: 9px;
-  text-align: center;
-  margin-top: 1rem;
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  transition: box-shadow 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 10%;
-}
-
-.footer-wrapper:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-}
-
-.octicon.octicon-mark-github {
-  position: relative;
-  top: 4px; /* Adjust to position the logo as per your preference */
-}
-
-
-.episode-list {
-  background-color: #162032;
-}
-
-/* Global styles */
-.container {
-  max-width: 90%;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
+/* Grid styles */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 2rem;
 }
 
-
-
-
-
-/* loading spinner animation */
+/* Loading spinner styles */
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
   border-top: 16px solid #ff69b4; /* Pink */
@@ -144,334 +65,4 @@ button[type="submit"]:hover, .episode-button:hover, .pagination button:hover {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Episode list */
-
-.episodes-section {
-  flex: 1;
-  width: 35%;
-  background-color: #162032;
-  border-radius: 10px;
-  padding: 20px;
-  overflow-y: auto;
-  height: auto;
-  max-height: 100%;
-  margin: 0;
-  overflow-x: hidden;
-  padding-bottom: 40px;
-}
-
-.episode-btn {
-  border: 2px solid #ff69b4; /* Border of darker pink color */
-  padding: 8px 12px;
-  font-size: 18px;
-  width: 100px;
-  text-align: center;
-  border-radius: 19px;
-}
-
-
-.episode-btn:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
-}
-
-.episode-grid {
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 400px;
-  gap: 15px;
-}
-
-.episode-search-section {
-  background-color:  #162032;
-  margin: 0;
-  padding: 0;
-}
-
-.episode-search-form {
-  margin-bottom: 2rem;
-  width: 70%; /* Adjust to your preference */
-  margin: 0 auto; /* Centers the form horizontally */
-  margin-bottom: 2rem;
-}
-
-.episode-search-input {
-  background-color: #162032;
-  border: none;
-  color: #fff;
-  padding: 10px 20px; /* Slightly decreased padding */
-  border-radius: 20px;
-  width: 100%; /* Full width of the parent */
-  outline: none;
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  transition: box-shadow 0.3s ease;
-  font-size: 1.2em; /* Increase the font size if needed */
-}
-
-.episode-search-input::placeholder {
-  color: #fff;
-  opacity: 0.7;
-}
-
-.episode-search-input:focus {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-}
-
-/* episode section scrollbar */
-
-/* Chrome and Edge */
-.episodes-section::-webkit-scrollbar {
-  width: 15px; /* Width of the scrollbar */
-}
-
-.episodes-section::-webkit-scrollbar-track {
-  background: #282a36; /* Background color of the track */
-  border-radius: 10px; /* Make the track rounded */
-}
-
-.episodes-section::-webkit-scrollbar-thumb {
-  background: #242424; /* Color of the scroll thumb */
-  border-radius: 10px; /* Make the scroll thumb rounded */
-  border: 3px solid #282a36; /* Create a "padding" effect */
-}
-
-.episodes-section::-webkit-scrollbar-thumb:hover {
-  background: #ff69b4; /* Color when hovering over the scroll thumb */
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3); /* Subtle pink glow when hovering */
-}
-
-/* Firefox */
-.episodes-section {
-  scrollbar-width: thick; /* Width of the scrollbar */
-  scrollbar-color: #242424 #282a36; /* Color of the scroll thumb and track */
-}
-
-.episodes-section:hover {
-  scrollbar-color: #ff69b4 #282a36; /* Color when hovering over the scroll thumb and track */
-}
-
-.anime-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  background-color: #242424;
-  height: 100%;  /* Adjust to 100% if you want to set the height relative to parent container */
-  width: 100%;  /* Add this line to set width relative to parent container */
-  margin: 0;
-  padding: 0;
-  padding-bottom: 50px;
-}
-@media(max-width:600px){
-  .anime-container{
-    justify-content: center;
-    align-items: center;
-  }
-}
-#anime-image img {
-  height: 50vh; 
-  object-fit: cover; 
-  margin-top: 1rem;
-  object-position: top; 
-  border-radius: 14px;
-}
-
-
-
-.anime-details {
-  flex: 1;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-}
-
-.anime-details #anime-title {
-  color: #fff;
-  width: 90%;
-  text-align: center;
-  height: auto;
-  font-size: calc(16px + 1vw);
-  overflow: hidden;
-  white-space: normal; /* Allow the text to wrap */
-}
-
-
-/* Video Player styles */
-.player-wrapper{
-  max-width: 800px;
-  margin-top: 10px;
-  display: flex;
-  gap: 30px;
-  justify-content: space-between;
-}
-@media(max-width:600px){
-  .player-wrapper{
-    flex-direction: column;
-  }
-}
-.episodelist{
-  background: red;
-}
-.videoPlayer {
-  background-color: #162032;
-  border-radius: 20px;
-  padding: 20px;
-  margin: 20px 0;
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  transition: box-shadow 0.3s ease;
-}
-
-.videoPlayer:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-}
-
-.videoPlayerError {
-  background-color: #ff6961; /* light red */
-  padding: 15px;
-  border-radius: 20px;
-  margin: 15px 0;
-  text-align: center;
-  font-size: 1.2em; 
-}
-
-.videoPlayerHeader {
-  color: #fff;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  overflow-y: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 3em;
-}
-
-.animeName {
-  color: #ff69b4;
-  font-size: 1.4em;
-  margin: 0;
-}
-
-.episodeNumber {
-  color: hsl(0, 0%, 80%);
-  font-size: 1.2em;
-}
-
-/* pagination */
-.episode-navigation {
-  display: flex;
-  gap: 20px;
-  padding: 30px;
-  margin-left: 70px;
-}
-
-.episodes-section-navigation .episode-button {
-  border: 2px solid #ff69b4; /* Border of darker pink color */
-  padding: 1em; /* Increase the padding to make the buttons bigger */
-  margin: 0.1em; /* Decrease the margin to reduce the gap between buttons */
-  background: #162032; /* Background color same as logo */
-  color: #ffffff;
-  font-family: sans-serif;
-  font-size: 0.85em;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-  border-radius: 20px; /* Similar border radius as logo */
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-  outline: none;
-  width: 130px; /* Set a fixed width */
-}
-
-.episode-navigation .episode-button:hover {
-  box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
-}
-
-/* Styles for disabled buttons */
-.episode-button:disabled:hover, .pagination button:disabled:hover {
-  background-color: #f47ca6;
-}
-
-/* Styles for enabled buttons */
-.episode-button:hover, .pagination button:hover {
-  background-color: #f47ca6;
-}
-
-/* CSS Media Query for mobile devices */
-
-@media (max-width: 768px) {
-  .anime-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #anime-details {
-    order: 1;
-  }
-
-  #episode-list {
-    order: 2;
-  }
-
-  .episodes-section {
-    flex: 1;
-    width: 89%;
-    background-color: #162032;
-    border-radius: 10px;
-    padding: 20px;
-    overflow-y: auto;
-    height: auto;
-    max-height: 100%;
-    margin: 0;
-    overflow-x: hidden;
-  }
-  
-  .episode-btn {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    border: 4px solid #ff69b4; /* Border of darker pink color */
-    padding: 0.8em; /* Increase the padding to make the buttons bigger */
-    text-decoration: none;
-    background: #162032; /* Background color same as logo */
-    color: #ffffff;
-    font-family: sans-serif;
-    font-size: 1em;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-    border-radius: 20px; /* Similar border radius as logo */
-    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-    outline: none;
-    white-space: nowrap; /* Prevents the text inside from breaking into new lines */
-    overflow: hidden; /* Hides any text that overflows the button */
-    text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
-    flex-grow: 1;
-}
-
-  .episode-btn:hover {
-    
-    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
-  }
-
-  .episode-grid {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-
-
-  .episode-image .image-container {
-    width: 100%;
-    height: 0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
 }

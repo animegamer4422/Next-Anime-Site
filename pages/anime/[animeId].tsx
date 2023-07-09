@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 
 import '../../src/app/globals.css';
+import styles from './AnimeDetails.module.css'
 import Header from '../../components/Header/Header';
 
 interface Anime {
@@ -74,54 +75,56 @@ export default function AnimeDetails() {
   }, [animeId]);
 
   return (
-    <div className="container">
-  <Header/>
-      <div className="search-section">
-        <form id="search-form">
-          <AnimeSearch />
-        </form>
-      </div>
-  
-      {loading ? (
-        <div className="loader"></div>
-      ) : anime ? (
-        <div className="anime-container">
-          <div className="anime-details" id="anime-details">
-            <h1 id="anime-title">{anime.title}</h1>
-            <div id="anime-image">
-              <img src={anime.image} alt={anime.title} />
+    <>
+      <Header/>
+      <form id="search-form">
+        <AnimeSearch />
+      </form>
+    
+      <div className={styles.content}>
+        <div className={styles.animeContainer}>
+          {loading ? (
+            <div className={styles.loader}></div>
+          ) : anime ? (
+            <div className={styles.animeContainer}>
+              <div className={styles.animeDetails}>
+                <h1 id="anime-title">{anime.title}</h1>
+                <div id="anime-image">
+                  <img src={anime.image} alt={anime.title} />
+                </div>
+                <p className={styles.animeDesc}> {anime.description}</p>
+              </div>
+    
+              <div className={styles.episodesSection}>
+                <div className={styles.episodeSearchSection}>
+                  <form className={styles.episodeSearchForm}>
+                    <input 
+                      type="text" 
+                      placeholder="Search episode..." 
+                      value={searchTerm} 
+                      onChange={handleSearch} 
+                      className={styles.episodeSearchInput}
+                    />
+                  </form>
+                </div>
+                <ul id="anime-episodes" className={styles.episodeGrid}>
+                  {filteredEpisodes.map((episode) => (
+                    <li key={episode.id}>
+                      <Link href={`/video-player/${episode.number}/${episode.id}`}>
+                          <h2 className={styles.episodeBtn}>
+                            EP {episode.number}
+                          </h2>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <p className="anime-desc" id="anime-description">{anime.description}</p>
-          </div>
-  
-          <div className="episodes-section" id="episode-list">
-            <div className="episode-search-section">
-              <form className="episode-search-form">
-                <input 
-                  type="text" 
-                  placeholder="Search episode..." 
-                  value={searchTerm} 
-                  onChange={handleSearch} 
-                  className="episode-search-input"
-                />
-              </form>
-            </div>
-            <ul id="anime-episodes" className="episode-grid">
-              {filteredEpisodes.map((episode) => (
-                <li key={episode.id}>
-                  <Link href={`/video-player/${episode.number}/${episode.id}`}>
-                      <h2 className="episode-btn">
-                        EP {episode.number}
-                      </h2>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ) : (
+            <p>Error loading data...</p>
+          )}
         </div>
-      ) : (
-        <p>Error loading data...</p>
-      )}
-    </div>
+      </div>
+    </>
   );  
-}  
+}
