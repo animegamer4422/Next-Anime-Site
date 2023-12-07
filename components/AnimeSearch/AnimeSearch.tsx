@@ -17,7 +17,7 @@ const AnimeSearch: React.FC = () => {
 
     if (e.target.value !== '') {
       try {
-        let response = await fetch(`https://animetrix-api.vercel.app/anime/gogoanime/${e.target.value}`);
+        let response = await fetch(`https://api-consumet-org-six.vercel.app/anime/gogoanime/${e.target.value}`);
         if (!response.ok) throw new Error('Error with first API');
         const data = await response.json();
         setAnimeList(data.results);

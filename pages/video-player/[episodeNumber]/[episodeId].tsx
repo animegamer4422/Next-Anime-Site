@@ -23,31 +23,37 @@ export default function VideoPlayer() {
   const [mainUrl, setMainUrl] = useState("");
 
   const fetchAnimeDetails = async (animeId: string) => {
-    const primaryApiUrl = `https://animetrix-api.vercel.app/anime/gogoanime/${animeId}`;
+    const primaryApiUrl = `https://api-consumet-org-six.vercel.app/anime/gogoanime/${animeId}`;
     const fallbackUrl = `https://api.consumet.org/anime/gogoanime/${animeId}`;
-
-    try {
-      const response = await fetch(primaryApiUrl);
-      if (!response.ok)
-        throw new Error(
-          `Error fetching anime details from primary API: ${response.statusText}`
-        );
-      const data = await response.json();
-      setAnime(data);
-    } catch (primaryApiError) {
-      console.error("Error:", primaryApiError);
-
-      // Fallback API
-      console.log("Fetching data from fallback API...");
-      const fallbackResponse = await fetch(fallbackUrl);
-      if (!fallbackResponse.ok)
-        throw new Error(
-          `Error fetching anime details from fallback API: ${fallbackResponse.statusText}`
-        );
-      const fallbackData = await fallbackResponse.json();
-      setAnime(fallbackData);
-    }
-  };
+    
+      try {
+        // Try fetching from the primary API
+        const response = await fetch(primaryApiUrl);
+        if (!response.ok) {
+          // If the response is not OK, throw an error
+          throw new Error(`Error fetching anime details from primary API: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setAnime(data); // Set the anime data from the primary API
+      } catch (primaryApiError) {
+        // If there was an error with the primary API request...
+        console.error("Error with primary API:", primaryApiError);
+    
+        try {
+          // Try fetching from the fallback API
+          const fallbackResponse = await fetch(fallbackUrl);
+          if (!fallbackResponse.ok) {
+            // If the response is not OK, throw an error
+            throw new Error(`Error fetching anime details from fallback API: ${fallbackResponse.statusText}`);
+          }
+          const fallbackData = await fallbackResponse.json();
+          setAnime(fallbackData); // Set the anime data from the fallback API
+        } catch (fallbackError) {
+          // If there was an error with the fallback API request...
+          console.error("Error with fallback API:", fallbackError);
+        }
+      }
+    }    
 
   const navigateToEpisode = (episodeChange: number) => {
     const newEpisodeNumber = Number(episodeNumber) + episodeChange;
@@ -66,7 +72,7 @@ export default function VideoPlayer() {
       }
       fetchAnimeDetails(baseAnimeId);
 
-      const apiUrl = `https://api.amvstr.ml/api/v2/stream/${episodeId}`;
+      const apiUrl = `https://api.amvstr.me/api/v2/stream/${episodeId}`;
       console.log(apiUrl);
       fetch(apiUrl)
         .then(response => response.json())

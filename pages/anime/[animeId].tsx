@@ -40,11 +40,12 @@ export default function AnimeDetails() {
       setLoading(true);
       if (typeof animeId === 'undefined') return;
 
-      const primaryApiUrl = `https://animetrix-api.vercel.app/anime/gogoanime/info/${animeId}`;
+      const primaryApiUrl = `https://api-consumet-org-six.vercel.app/anime/gogoanime/info/${animeId}`;
       const fallbackUrl = `https://api.consumet.org/anime/gogoanime/info/${animeId}`;
 
       try {
         const response = await fetch(primaryApiUrl);
+        console.log(primaryApiUrl);
 
         if (!response.ok) {
           throw new Error('Error fetching data from primary API');
