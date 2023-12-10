@@ -26,20 +26,21 @@ export default function VideoPlayer() {
     if (episodeId && typeof episodeId === 'string') {
       const apiUrl = `https://api.amvstr.me/api/v2/stream/${episodeId}`;
       console.log("Fetching stream from:", apiUrl);
-
+  
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
           const mainUrl = data.stream.multi.main.url;
-          const episodeNumber = episodeId.split('-').pop();
-          const animeTitle = episodeId.split('-').slice(0, -1).join(' ');
-
+          const episodeParts = episodeId.split('-');
+          const episodeNumber = episodeParts.pop() || 'Unknown';
+          const animeTitle = episodeParts.join(' ');
+  
           setMainUrl(mainUrl);
           setAnime({ title: animeTitle, episode: episodeNumber });
         })
         .catch(error => console.error('Error fetching stream:', error));
     }
-  }, [episodeId]);
+  }, [episodeId]);  
 
   useEffect(() => {
     if (mainUrl && videoRef.current) {
