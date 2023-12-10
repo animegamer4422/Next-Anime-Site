@@ -1,14 +1,14 @@
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { useEffect, useState, useRef } from 'react';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
-import '../../src/app/globals.css';
-import './Episode.module.css';
 import Head from 'next/head';
 import Header from '../../components/Header/Header';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Footer from '../../components/Footer/Footer';
+import '../../src/app/globals.css';
+import './Episode.module.css';
 
 interface Anime {
   title: string;
@@ -21,6 +21,7 @@ export default function VideoPlayer() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [anime, setAnime] = useState<Anime | null>(null);
   const [mainUrl, setMainUrl] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     if (episodeId && typeof episodeId === 'string') {
@@ -67,6 +68,12 @@ export default function VideoPlayer() {
     }
   }, [mainUrl]);
 
+  // Function to update searchQuery from AnimeSearch
+  const updateSearchQuery = (query: string) => {
+    setSearchQuery(query);
+    // Additional logic to handle search results can be added here
+  };
+
   return (
     <div>
       <Head>
@@ -83,13 +90,13 @@ export default function VideoPlayer() {
 
       <Header />
       <div className="search-section">
-        <AnimeSearch />
+        <AnimeSearch setQuery={updateSearchQuery} />
       </div>
 
       <main>
         <section className="video-section">
           <div className="container">
-          <h2 className="current-ep">Current Episode - {anime?.episode}</h2>
+            <h2 className="current-ep">Current Episode - {anime?.episode}</h2>
             <div className="player-wrapper">
               {mainUrl && (
                 <video ref={videoRef} id="player" width="320" height="240" controls playsInline>
