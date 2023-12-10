@@ -93,15 +93,15 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
       </div>
       <div className={style.grid}>
         {animeList.map(anime => (
-          <Link key={anime.id} href={`/anime/${anime.id}`} passHref>
-            <a className={style.searchResultImage}>
-              <div className={style.imageContainer}>
-                <img src={anime.image} alt={anime.title} className={style.searchImage} />
-              </div>
-              <h2 className={style.searchResultName}>{anime.title}</h2>
-            </a>
-          </Link>
-        ))}
+  <Link key={anime.id} href={`/anime/${anime.id}`} passHref>
+    <div className={style.searchResultImage}>
+      <div className={style.imageContainer}>
+        <img src={anime.image} alt={anime.title} className={style.searchImage} />
+      </div>
+      <h2 className={style.searchResultName}>{anime.title}</h2>
+    </div>
+  </Link>
+))}
       </div>
     </div>
   );
