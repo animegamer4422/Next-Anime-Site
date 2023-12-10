@@ -111,7 +111,7 @@ export default function AnimeDetails() {
                 <ul id="anime-episodes" className={styles.episodeGrid}>
                   {filteredEpisodes.map((episode) => (
                     <li key={episode.id}>
-                      <Link href={`/video-player/${episode.number}/${episode.id}`}>
+                      <Link href={`/video-player/${episode.id}`}>
                           <h2 className={styles.episodeBtn}>
                             EP {episode.number}
                           </h2>
