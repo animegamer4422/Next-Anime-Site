@@ -1,24 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import Plyr from 'plyr';
-import 'plyr/dist/plyr.css';
 import Hls from 'hls.js';
-import Head from 'next/head';
 import Header from '../../components/Header/Header';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Footer from '../../components/Footer/Footer';
 import '../../src/app/globals.css';
-import './Episode.module.css';
+import styles from './Episode.module.css';
 
 interface Anime {
   title: string;
   episode: string;
 }
 
+declare global {
+  interface Window { Artplayer: any; }
+}
+
+const artplayerStyles = {
+  width: '600px',
+  height: '400px',
+  margin: '60px auto 0',
+};
+
 export default function VideoPlayer() {
   const router = useRouter();
   const { episodeId } = router.query;
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef(null);
   const [anime, setAnime] = useState<Anime | null>(null);
   const [mainUrl, setMainUrl] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,33 +48,81 @@ export default function VideoPlayer() {
         })
         .catch(error => console.error('Error fetching stream:', error));
     }
-  }, [episodeId]);  
+  }, [episodeId]);
 
   useEffect(() => {
-    if (mainUrl && videoRef.current) {
-      const video = videoRef.current;
-      const player = new Plyr(video, {
-        controls: [
-          "play-large", "rewind", "play", "fast-forward", "progress",
-          "current-time", "duration", "mute", "volume", "captions",
-          "settings", "pip", "airplay", "fullscreen",
-        ],
-      });
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js';
+    script.async = true;
+  
+    script.onload = () => {
+      if (mainUrl && videoContainerRef.current) {
+        const artplayerOptions = {
+          container: videoContainerRef.current,
+          url: mainUrl,
+          volume: 0.5,
+          isLive: false,
+          muted: false,
+          autoplay: false,
+          pip: true,
+          autoSize: true,
+          autoMini: true,
+          screenshot: true,
+          setting: true,
+          loop: true,
+          flip: true,
+          playbackRate: true,
+          aspectRatio: true,
+          fullscreen: true,
+          fullscreenWeb: true,
+          subtitleOffset: true,
+          miniProgressBar: true,
+          mutex: true,
+          backdrop: true,
+          playsInline: true,
+          autoPlayback: true,
+          airplay: true,
+          theme: '#23ade5',
+          lang: navigator.language.toLowerCase(),
+          customType: {
+            'application/vnd.apple.mpegurl': function (video, url) {
+              if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                  video.play();
+                });
+              } else {
+                console.error('This browser does not support HLS');
+              }
+            },
+          },
+        };
 
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(mainUrl);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => video.pause());
-      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = mainUrl;
-        video.addEventListener("canplaythrough", () => video.pause());
-      } else {
-        console.error("This is a legacy browser that does not support HLS.");
+        if (window.Artplayer) {
+          const player = new window.Artplayer(artplayerOptions);
+          if (mainUrl.endsWith('.m3u8')) {
+            artplayerOptions.customType['application/vnd.apple.mpegurl'](player.video, mainUrl);
+          }
+        } else {
+          console.error('Artplayer is not loaded');
+        }
       }
-    }
-  }, [mainUrl]);
-
+    };
+  
+    script.onerror = () => {
+      console.error('Error loading Artplayer script');
+    };
+  
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [mainUrl, videoContainerRef]);
+  
   // Function to update searchQuery from AnimeSearch
   const updateSearchQuery = (query: string) => {
     setSearchQuery(query);
@@ -75,41 +130,27 @@ export default function VideoPlayer() {
   };
 
   return (
+    <>
+          <Header />
     <div>
-      <Head>
-        <title>{anime ? `${anime.title} - Episode ${anime.episode}` : 'Loading...'} | Anime Site</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
-        <style>{`
-          :root {
-            --plyr-color-main: #ff69b4;
-            --plyr-video-background: #282a36;
-          }
-        `}</style>
-      </Head>
-
-      <Header />
-      <div className="search-section">
+            <div className="search-section">
         <AnimeSearch setQuery={updateSearchQuery} />
       </div>
-
+      
       <main>
-        <section className="video-section">
-          <div className="container">
-            <h2 className="current-ep">Current Episode - {anime?.episode}</h2>
-            <div className="player-wrapper">
-              {mainUrl && (
-                <video ref={videoRef} id="player" width="320" height="240" controls playsInline>
-                  <source src={mainUrl} type="application/vnd.apple.mpegurl" />
-                  Your browser does not support the video tag.
-                </video>
-              )}
+        <section>
+          <div className={styles.container}> 
+            <h2 className={styles.currentEp}> 
+              Current Episode - {anime?.episode}
+            </h2>
+            <div className={styles.playerWrapper} ref={videoContainerRef} style={artplayerStyles}> 
+              {/* Artplayer will initialize its video player here */}
             </div>
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
+    </>
   );
 }

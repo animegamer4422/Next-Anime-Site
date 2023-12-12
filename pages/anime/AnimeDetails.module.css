@@ -153,8 +153,6 @@ margin: 20px;
   box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
 }
 
-/* episode section scrollbar */
-
 /* Chrome and Edge */
 .episodesSection::-webkit-scrollbar {
   width: 15px; /* Width of the scrollbar */
