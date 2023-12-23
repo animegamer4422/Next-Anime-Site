@@ -1,106 +1,106 @@
 .searchSection {
-    background-color:  #282a36;
-    margin: auto;
-    padding: 0;
-    margin-top: 50px;
-  }
-  
-  .searchForm {
-    max-width: 90%;
-    margin: 3rem auto;
-  }
-  
-  .searchForm input[type='text'] {
-    background-color: #162032;
-    border: none;
-    color: #fff;
-    padding: 15px 25px; /* Increased padding */
-    border-radius: 20px;
-    width: 100%; /* Full width of the parent */
-    outline: none;
-    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
-    transition: box-shadow 0.3s ease;
-    font-size: 1.2em; /* Increase the font size if needed */
-  }
-  
-  .searchForm input[type='text']::placeholder {
-    color: #fff;
-    opacity: 0.7;
-  }
-  
-  .searchForm input:focus ,#search-form input:hover {
-    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
-  }
-  .container {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 2rem;
-  }
-  
-  .searchResultImage, .recent-anime-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #242424; /* Replace with your desired color */
-    border-radius: 10px;
-    overflow: hidden;
-    height: 100%;
-  }
-  
-  .searchResultName {
-    background-color: #242424; /* Replace with your desired color */
-    color: #fff;
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    height: 3em; /* Adjust the height as needed */
-    font-size: 15px;
-  }
-  
-  .searchImage {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .episodeImage .imageContainer {
-    width: 100%;
-    height: 0;
-    padding-top: 75%; /* Adjust this value to change the aspect ratio */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* The switch - the box around the slider */
+  background-color: #282a36;
+  margin: auto;
+  padding: 0;
+  margin-top: 50px;
+}
+
+.searchForm {
+  max-width: 90%;
+  margin: 3rem auto;
+}
+
+.searchForm input[type='text'] {
+  background-color: #162032;
+  border: none;
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 20px;
+  width: 100%;
+  outline: none;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+  font-size: 1.2em;
+}
+
+.searchForm input[type='text']::placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
+
+.searchForm input:focus,
+#search-form input:hover {
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5), 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
+}
+
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 2rem;
+}
+
+.searchResultImage,
+.recent-anime-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #242424;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.searchResultName {
+  background-color: #242424;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 3em;
+  font-size: 15px;
+}
+
+.searchImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.episodeImage .imageContainer {
+  width: 100%;
+  height: 0;
+  padding-top: 75%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .switch {
-  position: relative;
+  position: center;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -125,21 +125,20 @@
   transition: .4s;
 }
 
-input:checked + .slider {
-  background-color: #f16d99; /* Pink color to match the button */
+input:checked+.slider {
+  background-color: #f16d99;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #ff86af; /* Pink glow for focus */
+input:focus+.slider {
+  box-shadow: 0 0 1px #ff86af;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
@@ -148,18 +147,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-/* AnimeSearch.module.css */
-
-.container {
-  /* Ensures there's some space around the container */
-  padding: 1rem;
-}
-
 .container {
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .searchForm {
@@ -169,16 +158,11 @@ input:checked + .slider:before {
   gap: 0.5rem;
   margin-top: -1rem;
   width: 100%;
-  max-width: 800px; /* Adjust this value based on your layout */
-}
-
-.searchInput {
-  flex-grow: 1; /* Takes up the available space */
-  margin-right: 0.5rem; /* Ensures there's a small gap between the input and the toggle */
+  max-width: 800px;
 }
 
 .toggleSwitchContainer {
-  flex-grow: 0; /* Prevents the container from growing */
+  flex-grow: 0;
   display: flex;
   align-items: center;
 }
@@ -190,5 +174,3 @@ input:checked + .slider:before {
 .toggleLabel {
   margin-left: 0.5rem;
 }
-
-/* The switch, slider, and round styles remain the same */
