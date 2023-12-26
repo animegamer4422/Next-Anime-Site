@@ -79,7 +79,9 @@ export default function AnimeDetails() {
     <>
       <Header/>
       <form id="search-form">
-        <AnimeSearch />
+        <AnimeSearch setQuery={function (query: string): void {
+          throw new Error('Function not implemented.');
+        } } />
       </form>
     
       <div className={styles.content}>
