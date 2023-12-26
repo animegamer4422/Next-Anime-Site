@@ -4,15 +4,19 @@ import Link from 'next/link';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Header from '../../components/Header/Header';
 import styles from './AnimeDetails.module.css';
-import useFetchAnimeDetails from './useFetchAnimeDetails'; // Import the custom hook
+import FetchAnimeDetails from '../../components/API/FetchAnimeDetails';
 
 export default function AnimeDetails() {
   const router = useRouter();
   const { animeId } = router.query;
-  const { anime, loading, error } = useFetchAnimeDetails(animeId); // Use the custom hook
+  const { anime, loading, error } = FetchAnimeDetails(animeId);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAnimeSearch = (query: string) => {
+    console.log("Anime Search Query:", query);
+  };
+
+  const handleEpisodeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
@@ -24,9 +28,7 @@ export default function AnimeDetails() {
     <>
       <Header/>
       <form id="search-form">
-        <AnimeSearch setQuery={function (query: string): void {
-          throw new Error('Function not implemented.');
-        } } />
+      <AnimeSearch setQuery={handleAnimeSearch} />
       </form>
 
       <div className={styles.content}>
@@ -45,15 +47,16 @@ export default function AnimeDetails() {
             </div>
 
             <div className={styles.episodesSection}>
-              <div className={styles.episodeSearchSection}>
-                <input 
-                  type="text" 
-                  placeholder="Search episode..." 
-                  value={searchTerm} 
-                  onChange={handleSearch} 
-                  className={styles.episodeSearchInput}
-                />
-              </div>
+          <div className={styles.episodeSearchSection}>
+            <input 
+              type="text" 
+              placeholder="Search episode..." 
+              value={searchTerm} 
+              onChange={handleEpisodeSearch} 
+              className={styles.episodeSearchInput}
+            />
+          </div>
+
               <ul id="anime-episodes" className={styles.episodeGrid}>
                 {filteredEpisodes.map((episode) => (
                   <li key={episode.id}>

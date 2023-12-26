@@ -21,10 +21,10 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
     if (localQuery) {
       performSearch();
     } else {
-      // If the search field is empty, fetch and display recent anime or new releases
-      fetchRecentAnime();
+      setAnimeList([]);
     }
   }, [localQuery, isDub]);
+  
 
   const performSearch = async () => {
     try {
@@ -35,19 +35,6 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
     } catch (error) {
       console.error('Error with primary API:', error);
       // Handle fallback API logic here if necessary
-    }
-  };
-
-  const fetchRecentAnime = async () => {
-    try {
-      // Fetch and display recent anime or new releases when the search field is empty
-      let response = await fetch('https://api-consumet-org-six.vercel.app/anime/recent');
-      if (!response.ok) throw new Error('Error fetching recent anime');
-      const data = await response.json();
-      setAnimeList(data.results);
-    } catch (error) {
-      console.error('Error fetching recent anime:', error);
-      setAnimeList([]);
     }
   };
 

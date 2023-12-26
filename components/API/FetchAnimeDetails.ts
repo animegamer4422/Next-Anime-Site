@@ -15,7 +15,7 @@ interface Episode {
   id: string;
 }
 
-const useFetchAnimeDetails = (animeId: string | string[] | undefined) => {
+const FetchAnimeDetails = (animeId: string | string[] | undefined) => {
   const [anime, setAnime] = useState<Anime | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
@@ -35,7 +35,6 @@ const useFetchAnimeDetails = (animeId: string | string[] | undefined) => {
         const data = await response.json() as Anime;
         setAnime(data);
       } catch (err) {
-        // Type check for the error object
         if (err instanceof Error) {
           setError(err.message);
         } else {
@@ -52,4 +51,4 @@ const useFetchAnimeDetails = (animeId: string | string[] | undefined) => {
   return { anime, loading, error };
 };
 
-export default useFetchAnimeDetails;
+export default FetchAnimeDetails;
