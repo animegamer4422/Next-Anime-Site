@@ -5,6 +5,7 @@ import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Header from '../../components/Header/Header';
 import styles from './AnimeDetails.module.css';
 import FetchAnimeDetails from '../../components/API/FetchAnimeDetails';
+import '../../src/app/globals.css';
 
 export default function AnimeDetails() {
   const router = useRouter();
