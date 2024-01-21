@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../../components/Header/Header';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
@@ -22,7 +22,8 @@ export default function VideoPlayer() {
   const [editableEpisodeNumber, setEditableEpisodeNumber] = useState("");
   const [episodeNotFound, setEpisodeNotFound] = useState(false);
   const { anime, loading, error } = FetchAnimeDetails(router.query.animeId);
-
+  const playerRef = useRef(null); // Reference to the video player element
+  
   useEffect(() => {
     const loadAnimeData = async (id: string) => {
       const apiUrl = `https://api.amvstr.me/api/v2/stream/${id}`;
@@ -65,7 +66,7 @@ export default function VideoPlayer() {
     }
   }, [editableEpisodeNumber, episodeId, router]);
 
-  const handleAnimeSearch = useCallback((query: string) => {
+  const handleAnimeSearch = useCallback((query: any) => {
     console.log("Anime Search Query:", query);
   }, []);
 
@@ -89,7 +90,7 @@ export default function VideoPlayer() {
             onKeyDown={(e) => { if (e.key === 'Enter') handleEpisodeInputConfirm(); }}
           />
           {episodeNotFound && <span className={styles.errorMsg}>Episode not found</span>}
-          <div className={styles.playerWrapper}>
+          <div ref={playerRef} className={styles.playerWrapper}>
             {mainUrl && <ArtplayerComponent mainUrl={mainUrl} style={artplayerStyles} />}
           </div>
           {anime && <AnimeEpisodesComponent episodes={anime.episodes} />}
