@@ -46,7 +46,6 @@ const ArtplayerComponent: React.FC<ArtplayerComponentProps> = ({ mainUrl, style 
         type: 'm3u8',
         customType: {
           m3u8: playM3u8,
-        },
               isLive: false,
               muted: false,
               autoplay: false,
