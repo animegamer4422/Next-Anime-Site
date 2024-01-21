@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 // Interfaces for Anime details
-interface Anime {
+export interface Anime {
   id: string;
   title: string;
   image: string;
@@ -10,7 +10,7 @@ interface Anime {
   episodes: Episode[];
 }
 
-interface Episode {
+export interface Episode {
   number: number;
   id: string;
 }

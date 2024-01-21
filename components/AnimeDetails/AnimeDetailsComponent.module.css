@@ -1,0 +1,73 @@
+.content{
+    margin: 20px;
+    }
+    
+    .animeContainer {
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 100%;
+        background-color: #242424;
+        height: auto;
+        padding: 0;
+        border-radius: 20px;
+      }
+      
+      .animeDetails {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .animeTitle {
+        color: #fff;
+        width: 90%;
+        text-align: center;
+        font-size: calc(16px + 1vw);
+        overflow: hidden;
+        white-space: normal;
+      }      
+    
+    .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid #ff69b4; /* Pink */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .contentWrapper {
+      max-width: 90%; /* or whatever percentage or pixel value you prefer */
+      margin: 0 auto; /* this centers the wrapper on the page */
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 100%;
+    }
+    
+    
+    @media (max-width: 600px) {
+      .animeContainer {
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    
+    .animeImage img {
+        height: 50vh;
+        object-fit: cover;
+        margin-top: 1rem;
+        object-position: top;
+        border-radius: 14px;
+      }
+      

@@ -4,9 +4,10 @@ import Header from '../../components/Header/Header';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Footer from '../../components/Footer/Footer';
 import ArtplayerComponent from './ArtplayerComponent';
-import useFetchAnimeDetails from '../../components/API/FetchAnimeDetails';
 import '../../src/app/globals.css';
 import styles from './Episode.module.css';
+import AnimeEpisodesComponent from '../../components/AnimeEpisodes/AnimeEpisodes';
+import FetchAnimeDetails from '../../components/API/FetchAnimeDetails';
 
 const artplayerStyles = {
   width: '600px',
@@ -17,12 +18,10 @@ const artplayerStyles = {
 export default function VideoPlayer() {
   const router = useRouter();
   const { episodeId } = router.query;
-  const { anime } = useFetchAnimeDetails(episodeId);
   const [mainUrl, setMainUrl] = useState("");
   const [editableEpisodeNumber, setEditableEpisodeNumber] = useState("");
   const [episodeNotFound, setEpisodeNotFound] = useState(false);
-
-  console.log("Initial episodeId from router.query:", episodeId); // Debug log
+  const { anime, loading, error } = FetchAnimeDetails(router.query.animeId);
 
   useEffect(() => {
     if (episodeId && typeof episodeId === 'string') {
@@ -30,13 +29,12 @@ export default function VideoPlayer() {
       const episodeNumber = episodeParts.pop() || '';
       setEditableEpisodeNumber(episodeNumber);
       loadAnimeData(episodeId);
+      console.log("Anime Data Loaded");
     }
-  }, [episodeId, anime]);
+  }, [episodeId]);
 
   const loadAnimeData = async (id: string) => {
     const apiUrl = `https://api.amvstr.me/api/v2/stream/${id}`;
-    console.log("Attempting to load data from:", apiUrl); // Debug log
-
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
@@ -44,7 +42,6 @@ export default function VideoPlayer() {
         setMainUrl(data.stream.multi.main.url);
         setEpisodeNotFound(false);
       } else {
-        console.error("Stream data is invalid:", data); // Debug log
         setEpisodeNotFound(true);
       }
     } catch (error) {
@@ -52,64 +49,52 @@ export default function VideoPlayer() {
       setEpisodeNotFound(true);
     }
   };
-  
 
   const handleEpisodeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditableEpisodeNumber(event.target.value);
     setEpisodeNotFound(false);
   };
 
-  const handleEpisodeInputConfirm = () => {
-    const parsedEpisodeNumber = parseInt(editableEpisodeNumber);
-    console.log("Parsed episode number:", parsedEpisodeNumber); // Debug log
-  
+  const handleEpisodeInputConfirm = useCallback(() => {
+    const parsedEpisodeNumber = parseInt(editableEpisodeNumber, 10);
     if (!isNaN(parsedEpisodeNumber)) {
-      // Ensure episodeId is a string and extract the base ID
       const baseId = typeof episodeId === 'string' ? episodeId.split('-episode-')[0] : '';
       const newEpisodeId = `${baseId}-episode-${parsedEpisodeNumber}`;
-      console.log("New episodeId generated:", newEpisodeId); // Debug log
-  
-      loadAnimeData(newEpisodeId);
+      router.push(`/video-player/${newEpisodeId}`);
     } else {
-      console.log("Invalid episode number input:", editableEpisodeNumber); // Debug log
       setEpisodeNotFound(true);
     }
-  };
+  }, [editableEpisodeNumber, episodeId, router]);
 
-    // New function to handle anime search
-  const handleAnimeSearch = (query: string) => {
-    // You can update state, fetch data, or redirect based on the query
+  const handleAnimeSearch = useCallback((query: string) => {
     console.log("Anime Search Query:", query);
-    // Implement logic to handle anime search
-  };
+  }, []);
+
+  if (error) {
+    return <div>Error loading data: {error}</div>;
+  }
 
   return (
     <>
-      <Header/>
-      <form id="search-form">
+      <Header />
       <AnimeSearch setQuery={handleAnimeSearch} />
-      </form>
       <main>
-      <section>
-  <div className={styles.container}> 
-    <h2 className={styles.currentEp}> 
-      Current Episode - 
-      <input 
-        type="text" 
-        value={editableEpisodeNumber}
-        className={styles.episodeSearchInput} // Apply the same styling class
-        onChange={handleEpisodeInputChange}
-        onBlur={handleEpisodeInputConfirm}
-        onKeyDown={(e) => { if (e.key === 'Enter') handleEpisodeInputConfirm(); }}
-      />
-      {episodeNotFound && <span className={styles.errorMsg}>Episode not found</span>}
-    </h2>
-    <div className={styles.playerWrapper}>
-      {mainUrl && <ArtplayerComponent mainUrl={mainUrl} style={artplayerStyles}/>}
-    </div>
-  </div>
-</section>
-
+        <section className={styles.container}>
+          <h2 className={styles.currentEp}>Current Episode</h2>
+          <input
+            type="text"
+            value={editableEpisodeNumber}
+            className={styles.episodeSearchInput}
+            onChange={handleEpisodeInputChange}
+            onBlur={handleEpisodeInputConfirm}
+            onKeyDown={(e) => { if (e.key === 'Enter') handleEpisodeInputConfirm(); }}
+          />
+          {episodeNotFound && <span className={styles.errorMsg}>Episode not found</span>}
+          <div className={styles.playerWrapper}>
+            {mainUrl && <ArtplayerComponent mainUrl={mainUrl} style={artplayerStyles} />}
+          </div>
+          {anime && <AnimeEpisodesComponent episodes={anime.episodes} />}
+        </section>
       </main>
       <Footer />
     </>

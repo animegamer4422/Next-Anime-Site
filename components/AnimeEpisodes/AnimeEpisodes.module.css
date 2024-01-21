@@ -1,0 +1,181 @@
+.episodesSection {
+    flex: 1;
+    background-color: #162032;
+    border-radius: 10px;
+    padding-top: 20px;
+    overflow-y: auto;
+    height: auto;
+    max-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  
+  .episodeBtn {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    border: 4px solid #ff69b4; /* Border of darker pink color */
+    padding: 0.8em; /* Increase the padding to make the buttons bigger */
+    text-decoration: none;
+    background: #162032; /* Background color same as logo */
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1em;
+    margin: 2em;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px; /* Similar border radius as logo */
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    outline: none;
+    white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+    overflow: hidden; /* Hides any text that overflows the button */
+    text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+    flex-grow: 1;
+  }
+  .episodeBtn:hover {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
+  }
+  .episodeGrid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  
+  .episodeSearchSection {
+    background-color: #162032;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .episodeSearchForm {
+    margin-bottom: 2rem;
+    width: 70%; /* Adjust to your preference */
+    margin: 0 auto; /* Centers the form horizontally */
+    margin-bottom: 2rem;
+  }
+  
+  .episodeSearchInput {
+    background-color: #162032;
+    border: none;
+    color: #fff;
+    padding: 10px 20px; /* Slightly decreased padding */
+    border-radius: 20px;
+    width: 100%; /* Full width of the parent */
+    outline: none;
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+    transition: box-shadow 0.3s ease;
+    font-size: 1.2em; /* Increase the font size if needed */
+  }
+  
+  .episodeSearchInput::placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
+  
+  .episodeSearchInput:focus {
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5);
+  }
+  
+  /* Chrome and Edge */
+  .episodesSection::-webkit-scrollbar {
+    width: 15px; /* Width of the scrollbar */
+  }
+  
+  .episodesSection::-webkit-scrollbar-track {
+    background: #282a36; /* Background color of the track */
+    border-radius: 10px; /* Make the track rounded */
+  }
+  
+  .episodesSection::-webkit-scrollbar-thumb {
+    background: #242424; /* Color of the scroll thumb */
+    border-radius: 10px; /* Make the scroll thumb rounded */
+    border: 3px solid #282a36; /* Create a "padding" effect */
+  }
+  
+  .episodesSection::-webkit-scrollbar-thumb:hover {
+    background: #ff69b4; /* Color when hovering over the scroll thumb */
+    box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3); /* Subtle pink glow when hovering */
+  }
+  
+  /* Firefox */
+  .episodesSection {
+    scrollbar-width: thick; /* Width of the scrollbar */
+    scrollbar-color: #242424 #282a36; /* Color of the scroll thumb and track */
+  }
+  
+  .episodesSection:hover {
+    scrollbar-color: #ff69b4 #282a36; /* Color when hovering over the scroll thumb and track */
+  }
+  
+  @media (max-width: 768px) {
+    .animeContainer {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    #animeDetails {
+      order: 1;
+    }
+  
+    #episodeList {
+      order: 2;
+    }
+  
+    .episodesSection {
+      flex: 1;
+      background-color: #162032;
+      border-radius: 10px;
+      padding-top: 20px;
+      overflow-y: auto;
+      height: auto;
+      max-height: 100%;
+      overflow-x: hidden;
+    }  
+  
+    .episodeBtn {
+      display: flex;
+      justify-content: center;
+      align-items: left;
+      border: 4px solid #ff69b4; /* Border of darker pink color */
+      padding: 0.8em; /* Increase the padding to make the buttons bigger */
+      text-decoration: none;
+      background: #162032; /* Background color same as logo */
+      color: #ffffff;
+      font-family: sans-serif;
+      font-size: 1em;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+      border-radius: 20px; /* Similar border radius as logo */
+      box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.3);
+      outline: none;
+      white-space: nowrap; /* Prevents the text inside from breaking into new lines */
+      overflow: hidden; /* Hides any text that overflows the button */
+      text-overflow: ellipsis; /* Replaces overflowing text with an ellipsis (...) */
+      flex-grow: 1;
+  }
+  
+    .episodeBtn:hover {
+      
+      box-shadow: 0px 0px 15px 0px rgba(255, 105, 180, 0.5); /* Subtle pink glow */
+    }
+  
+    .episodeGrid {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .episodeImage .imageContainer {
+      width: 100%;
+      height: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+}

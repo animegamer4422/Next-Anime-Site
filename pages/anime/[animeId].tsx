@@ -1,80 +1,43 @@
-import React, { useState } from 'react';
+// pages/anime/[animeId].tsx
+
+import React from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import AnimeSearch from '../../components/AnimeSearch/AnimeSearch';
 import Header from '../../components/Header/Header';
-import styles from './AnimeDetails.module.css';
+import AnimeDetailsComponent from '../../components/AnimeDetails/AnimeDetailsComponent';
+import AnimeEpisodesComponent from '../../components/AnimeEpisodes/AnimeEpisodes';
 import FetchAnimeDetails from '../../components/API/FetchAnimeDetails';
-import '../../src/app/globals.css';
+import '../../src/app/globals.css'; // This includes the loader styles
 
-export default function AnimeDetails() {
+export default function AnimeDetailsPage() {
   const router = useRouter();
   const { animeId } = router.query;
   const { anime, loading, error } = FetchAnimeDetails(animeId);
-  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleAnimeSearch = (query: string) => {
-    console.log("Anime Search Query:", query);
-  };
+  if (loading) {
+    return <div className="loader"></div>; // Use the global loader class
+  }
 
-  const handleEpisodeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
+  if (error) {
+    return <div>Error loading data: {error}</div>;
+  }
 
-  const filteredEpisodes = anime ? anime.episodes.filter((episode) =>
-    episode.number.toString().includes(searchTerm)
-  ) : [];
+  if (!anime) {
+    return <div>Anime not found.</div>;
+  }
 
   return (
     <>
-      <Header/>
-      <form id="search-form">
-      <AnimeSearch setQuery={handleAnimeSearch} />
-      </form>
+      <Header />
+      <AnimeSearch setQuery={(query: string) => console.log("Anime Search Query:", query)} />
 
-      <div className={styles.content}>
-        {loading ? (
-          <div className={styles.loader}></div>
-        ) : error ? (
-          <p>Error loading data: {error}</p>
-        ) : anime ? (
-          <div className={styles.animeContainer}>
-            <div className={styles.animeDetails}>
-              <h1 id="anime-title">{anime.title}</h1>
-              <div id="anime-image">
-                <img src={anime.image} alt={anime.title} />
-              </div>
-              <p className={styles.animeDesc}> {anime.description}</p>
-            </div>
+      <AnimeDetailsComponent 
+        title={anime.title}
+        image={anime.image}
+        description={anime.description}
+      />
 
-            <div className={styles.episodesSection}>
-          <div className={styles.episodeSearchSection}>
-            <input 
-              type="text" 
-              placeholder="Search episode..." 
-              value={searchTerm} 
-              onChange={handleEpisodeSearch} 
-              className={styles.episodeSearchInput}
-            />
-          </div>
-
-              <ul id="anime-episodes" className={styles.episodeGrid}>
-                {filteredEpisodes.map((episode) => (
-                  <li key={episode.id}>
-                    <Link href={`/video-player/${episode.id}`}>
-                      <h2 className={styles.episodeBtn}>
-                        EP {episode.number}
-                      </h2>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ) : (
-          <p>Anime not found.</p>
-        )}
-      </div>
+      <AnimeEpisodesComponent episodes={anime.episodes} />
     </>
   );
 }
