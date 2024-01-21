@@ -47,8 +47,28 @@ const ArtplayerComponent: React.FC<ArtplayerComponentProps> = ({ mainUrl, style 
         customType: {
           m3u8: playM3u8,
         },
-        // ...other options
-        theme: '#23ade5',
+              isLive: false,
+              muted: false,
+              autoplay: false,
+              pip: true,
+              autoSize: true,
+              autoMini: true,
+              screenshot: true,
+              setting: true,
+              loop: true,
+              flip: true,
+              playbackRate: true,
+              aspectRatio: true,
+              fullscreen: true,
+              fullscreenWeb: true,
+              subtitleOffset: true,
+              miniProgressBar: true,
+              mutex: true,
+              backdrop: true,
+              playsInline: true,
+              autoPlayback: true,
+              airplay: true,
+              theme: '#23ade5',
       };
 
       artInstanceRef.current = new Artplayer(artplayerOptions) as ExtendedArtplayer;
