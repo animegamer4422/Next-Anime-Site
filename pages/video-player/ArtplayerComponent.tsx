@@ -70,12 +70,6 @@ const ArtplayerComponent: React.FC<ArtplayerComponentProps> = ({ mainUrl, style 
       art.on('ready', () => {
         console.info('Artplayer is ready:', art);
       });
-
-      return () => {
-        if (art) {
-          art.destroy();
-        }
-      };
     }
   }, [mainUrl]);
 

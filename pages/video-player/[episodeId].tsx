@@ -24,36 +24,35 @@ export default function VideoPlayer() {
   const { anime, loading, error } = FetchAnimeDetails(router.query.animeId);
 
   useEffect(() => {
+    const loadAnimeData = async (id: string) => {
+      const apiUrl = `https://api.amvstr.me/api/v2/stream/${id}`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data && data.stream && data.stream.multi && data.stream.multi.main && data.stream.multi.main.url) {
+          setMainUrl(data.stream.multi.main.url);
+          setEpisodeNotFound(false);
+        } else {
+          setEpisodeNotFound(true);
+        }
+      } catch (error) {
+        console.error('Error fetching stream:', error);
+        setEpisodeNotFound(true);
+      }
+    };
+
     if (episodeId && typeof episodeId === 'string') {
       const episodeParts = episodeId.split('-');
       const episodeNumber = episodeParts.pop() || '';
       setEditableEpisodeNumber(episodeNumber);
       loadAnimeData(episodeId);
-      console.log("Anime Data Loaded");
     }
   }, [episodeId]);
 
-  const loadAnimeData = async (id: string) => {
-    const apiUrl = `https://api.amvstr.me/api/v2/stream/${id}`;
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      if (data && data.stream && data.stream.multi && data.stream.multi.main && data.stream.multi.main.url) {
-        setMainUrl(data.stream.multi.main.url);
-        setEpisodeNotFound(false);
-      } else {
-        setEpisodeNotFound(true);
-      }
-    } catch (error) {
-      console.error('Error fetching stream:', error);
-      setEpisodeNotFound(true);
-    }
-  };
-
-  const handleEpisodeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEpisodeInputChange = useCallback((event: { target: { value: React.SetStateAction<string>; }; }) => {
     setEditableEpisodeNumber(event.target.value);
     setEpisodeNotFound(false);
-  };
+  }, []);
 
   const handleEpisodeInputConfirm = useCallback(() => {
     const parsedEpisodeNumber = parseInt(editableEpisodeNumber, 10);
