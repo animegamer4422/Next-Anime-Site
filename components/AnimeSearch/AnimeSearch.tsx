@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import style from './AnimeSearch.module.css';
 
 interface Anime {
@@ -16,6 +17,7 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
   const [localQuery, setLocalQuery] = useState('');
   const [animeList, setAnimeList] = useState<Anime[]>([]);
   const [isDub, setIsDub] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (localQuery) {
@@ -24,7 +26,18 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
       setAnimeList([]);
     }
   }, [localQuery, isDub]);
-  
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setLocalQuery('');
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   const performSearch = async () => {
     try {
@@ -80,15 +93,15 @@ const AnimeSearch: React.FC<AnimeSearchProps> = ({ setQuery: setParentQuery }) =
       </div>
       <div className={style.grid}>
         {animeList.map(anime => (
-  <Link key={anime.id} href={`/anime/${anime.id}`} passHref>
-    <div className={style.searchResultImage}>
-      <div className={style.imageContainer}>
-        <img src={anime.image} alt={anime.title} className={style.searchImage} />
-      </div>
-      <h2 className={style.searchResultName}>{anime.title}</h2>
-    </div>
-  </Link>
-))}
+          <Link key={anime.id} href={`/anime/${anime.id}`} passHref>
+            <div className={style.searchResultImage}>
+              <div className={style.imageContainer}>
+                <img src={anime.image} alt={anime.title} className={style.searchImage} />
+              </div>
+              <h2 className={style.searchResultName}>{anime.title}</h2>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

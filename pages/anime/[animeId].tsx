@@ -24,7 +24,6 @@ export default function AnimeDetailsPage() {
     );
   }
   
-
   if (error) {
     return (
       <div>
