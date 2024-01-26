@@ -15,15 +15,32 @@ export default function AnimeDetailsPage() {
   const { anime, loading, error } = FetchAnimeDetails(animeId);
 
   if (loading) {
-    return <div className="loader"></div>; // Use the global loader class
+    return (
+      <>
+        <Header />
+        <AnimeSearch setQuery={(query: string) => console.log("Anime Search Query:", query)} />
+        <div className="loader"></div>
+      </>
+    );
   }
+  
 
   if (error) {
-    return <div>Error loading data: {error}</div>;
+    return (
+      <div>
+        <p>Error loading data: {error}</p>
+        <button onClick={() => router.back()}>Go Back</button>
+      </div>
+    );
   }
 
   if (!anime) {
-    return <div>Anime not found.</div>;
+    return (
+      <div>
+        <p>Anime not found.</p>
+        <button onClick={() => router.back()}>Go Back</button>
+      </div>
+    );
   }
 
   return (
